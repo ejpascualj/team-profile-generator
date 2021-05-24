@@ -20,11 +20,11 @@ generateHTML = () => {
     </head>
     <body>
         <header>
-            <h1 class="text-center">Team Profile</h1>
+            <h1>Team Profile</h1>
         </header>
-        <div class="container">
-            <div class="row">`;
-    fs.writeFile("./dist/team.html", html, (err) => {
+        <div>
+            <div>`;
+    fs.writeFile("./dist/index.html", html, (err) => {
         if (err) {
             console.log(err);
         }
@@ -55,31 +55,31 @@ generateMemberHTML = (member) => {
         } else if (role === "Intern") {
             const school = member.getSchool();
             data = `<div>
-            <div" style="width: 18rem">
+            <div>
             <h5>${name}</h5>
             <h5>Intern</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email Address: ${email}</li>
-                <li class="list-group-item">School: ${school}</li>
+            <ul>
+                <li>ID: ${id}</li>
+                <li>Email Address: ${email}</li>
+                <li>School: ${school}</li>
             </ul>
             </div>
         </div>`;
         } else {
             const office = member.getOffice();
-            data = `<div class="col-6">
-            <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Manager</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email Address: ${email}</li>
-                <li class="list-group-item">Office Phone: ${office}</li>
+            data = `<div>
+            <div" style="width: 18rem">
+            <h5>${name}<br /><br />Manager</h5>
+            <ul>
+                <li>ID: ${id}</li>
+                <li>Email Address: ${email}</li>
+                <li>Office Phone: ${office}</li>
             </ul>
             </div>
         </div>`
         }
-        console.log("adding team member");
-        fs.appendFile("./dist/team.html", data, (err) => {
+        console.log("team member added");
+        fs.appendFile("./dist/index.html", data, (err) => {
             if (err) {
                 return reject(err);
             };
@@ -94,15 +94,13 @@ closeHTML = () => {
     
     </body>
     </html>`;
-    fs.appendFile("./dist/team.html", html, (err) => {
+    fs.appendFile("./dist/index.html", html, (err) => {
         if (err) {
             console.log(err);
         };
     });
     console.log("end");
 }
-
-
 
 // module.exports = generate;
 exports.generateHTML = generateHTML;
