@@ -1,5 +1,5 @@
 const { describe } = require('@jest/globals');
-const Manager = require('../lib/Manager.js');
+const Manager = require('../lib/Manager');
 
 describe("Manager",() => {
     // officeNumber

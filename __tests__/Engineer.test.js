@@ -1,5 +1,5 @@
 const { describe } = require('@jest/globals');
-const Engineer = require('../lib/Engineer.js');
+const Engineer = require('../lib/Engineer');
 
 describe("Engineer", ()=>{
     // github
