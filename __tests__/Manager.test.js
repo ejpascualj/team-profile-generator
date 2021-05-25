@@ -2,12 +2,12 @@ const { describe } = require('@jest/globals');
 const Manager = require('../lib/Manager');
 
 describe("Manager",() => {
-    // officeNumber
-    describe("officeNumber", () => {
+    // office
+    describe("office", () => {
         it("should return employees office Number", () => {
-            const officeNumber = 100;
-            const result = new Manager("Bob", 10, "bob@email.com", officeNumber);
-            expect(result.officeNumber).toEqual(officeNumber);
+            const office = 100;
+            const result = new Manager("Bob", 10, "bob@email.com", office);
+            expect(result.office).toEqual(office);
         });
     });
     // getRole()
