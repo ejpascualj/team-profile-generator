@@ -8,21 +8,21 @@ const Manager = require("../lib/Manager");
 
 generateHTML = () => {
     const html =
-        `<!DOCTYPE html>
+    `<!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <title>Team</title>
-        <!-- Latest compiled and minified CSS & JS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     </head>
     <body>
-        <header>
-            <h1>Team Profile</h1>
+        <header class="bg-danger bg-gradient">
+            <h1 class="text-center text-white">Team Profile</h1>
         </header>
         <div>
-            <div>`;
+            <div class="container">`;
     fs.writeFile("./dist/index.html", html, (err) => {
         if (err) {
             console.log(err);
@@ -53,14 +53,15 @@ generateMemberHTML = (member) => {
             break;
     };
     return new Promise((resolve, reject) => {
-        let data = `<div>
-            <div>
-                <h5>${name}</h5>
-                <h5>${role}</h5>
-                <ul>
-                    <li>ID: ${id}</li>
-                    <li>Email ${email}</li>
-                    <li>${prop}: ${propValue}</li>
+        let data = 
+        `<div class="card-deck">
+            <div class="card" style="width: 18rem;">
+                <h4 class="card-title text-center"> ${name} </h4>
+                <h5 class="card-subtitle mb-2 text-muted text-center"> ${role} </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> ID: ${id} </li>
+                    <li class="list-group-item"> Email ${email} </li>
+                    <li class="list-group-item"> ${prop}: ${propValue} </li>
                 </ul>
             </div>
         </div>`;
@@ -75,11 +76,15 @@ generateMemberHTML = (member) => {
 }
 
 closeHTML = () => {
-    const html = ` </div>
-    </div>    
+    const data = 
+    ` </div>
+    </div> 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>  
     </body>
     </html>`;
-    fs.appendFile("./dist/index.html", html, (err) => {
+    fs.appendFile("./dist/index.html", data, (err) => {
         if (err) {
             console.log(err);
         };
