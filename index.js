@@ -60,20 +60,20 @@ addMember = () => {
         name: "addMore"
     }])
         .then(({role, name, id, email, additionalProperty, addMore}) => {
-            console.log(role, name, id, email)
             let member;
-            if (role === "Manager") {
-                member = new Manager(name, id, email, additionalProperty);
-            } else if (role === "Engineer") {
-                member = new Engineer(name, id, email, additionalProperty);
-            } else if (role === "Engineer") {
-                member = new Intern(name, id, email, additionalProperty);
-            } else{
-                return console.error();
-            }
+            switch (role) {
+                case "Manager":
+                    member = new Manager(name, id, email, additionalProperty);
+                    break;
+                case "Engineer":
+                    member = new Engineer(name, id, email, additionalProperty);
+                    break;
+                case "Intern":
+                    member = new Intern(name, id, email, additionalProperty)
+            };
             console.log(member)
             employees.push(member);
-            generate.generateMemberHTML(member, role)
+            generate.generateMemberHTML(member)
                 .then(() => {
                     if (addMore === "yes") {
                         addMember();
@@ -81,7 +81,6 @@ addMember = () => {
                         generate.closeHTML();
                     }
                 });
-
         });
 };
 

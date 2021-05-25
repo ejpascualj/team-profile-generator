@@ -41,19 +41,19 @@ generateMemberHTML = (member) => {
     switch (role) {
         case "Engineer":
             prop = "GitHub"
-            propValue = member.getGithub();
+            propValue = member.github;
             break;
         case "Manager":
             prop = "Office"
             propValue = member.office;
             break;
         case "Intern":
-            prop = "GitHub"
-            propValue = member.office;
+            prop = "School"
+            propValue = member.school;
             break;
     };
     return new Promise((resolve, reject) => {
-        let html = `<div>
+        let data = `<div>
             <div>
                 <h5>${name}</h5>
                 <h5>${role}</h5>
@@ -65,7 +65,7 @@ generateMemberHTML = (member) => {
             </div>
         </div>`;
         console.log("team member added");
-        fs.appendFile("./dist/index.html", html, (err) => {
+        fs.appendFile("./dist/index.html", data, (err) => {
             if (err) {
                 return reject(err);
             };
@@ -76,8 +76,7 @@ generateMemberHTML = (member) => {
 
 closeHTML = () => {
     const html = ` </div>
-    </div>
-    
+    </div>    
     </body>
     </html>`;
     fs.appendFile("./dist/index.html", html, (err) => {
