@@ -1,19 +1,16 @@
-// Require the three classes, need inquirer and fs
-// CreateManager(), CreateEngineer(), CreateIntern(), What-to-do-next?(), calls fs.write file and writes the file.
 // Require inquirer and fs
 const inquirer = require('inquirer');
 const fs = require('fs');
+
 // Require classes
-const Employee = require("./lib/Employee")
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+
 // Require generate functions
 const generate = require('./src/generate')
-// const generateHTML = require("./src/generate");
-// const generateMemberHTML = require("./src/generate");
-// const closeHTML = require("./src/generate");
 
+//Empty employees array 
 const employees = [];
 
 addMember = () => {
@@ -21,61 +18,72 @@ addMember = () => {
         type: "list",
         message: "Enter role",
         choices: ["Manager", "Engineer", "Intern"],
-        name: "role"
+        name: "role",
     },
     {
         message: "Enter name",
-        name: "name"
+        name: "name",
     },
     {
         message: "Enter id",
-        name: "id"
+        name: "id",
     },
     {
         message: "Enter email",
-        name: "email"
+        name: "email",
+    },
+    {
+        message: `Enter office`,
+        name: "additionalProperty",
+        when: function(answers){
+            return answers.role === "Manager"
+        },
+    },
+    {
+        message: `Enter github`,
+        name: "additionalProperty",
+        when: function(answers){
+            return answers.role === "Engineer"
+        },
+    },
+    {
+        message: `Enter school`,
+        name: "additionalProperty",
+        when: function(answers){
+            return answers.role === "Intern";
+        },
+    },
+    {
+        type: "list",
+        message: "Do you want to add more team members?",
+        choices: ["yes", "no"],
+        name: "addMore"
     }])
-        .then(({name, role, id, email}) => {
-            let additionalProperty = "";
+        .then(({role, name, id, email, additionalProperty, addMore}) => {
+            console.log(role, name, id, email)
+            let member;
             if (role === "Manager") {
-                additionalProperty = "office";
+                member = new Manager(name, id, email, additionalProperty);
             } else if (role === "Engineer") {
-                additionalProperty = "github";
-            } else {
-                additionalProperty = "school";
+                member = new Engineer(name, id, email, additionalProperty);
+            } else if (role === "Engineer") {
+                member = new Intern(name, id, email, additionalProperty);
+            } else{
+                return console.error();
             }
-            inquirer.prompt([{
-                message: `Enter ${additionalProperty}`,
-                name: "additionalProperty"
-            },
-            {
-                type: "list",
-                message: "Do you want to add more team members?",
-                choices: ["yes","no"],
-                name: "addMore"
-            }])
-                .then(({name, role, id, email, additionalProperty, addMore }) => {
-                    let member;
-                    if (role === "Manager") {
-                        member = new Manager(name, id, email, additionalProperty);
-                    } else if (role === "Engineer") {
-                        member = new Engineer(name, id, email, additionalProperty);
+            console.log(member)
+            employees.push(member);
+            generate.generateMemberHTML(member, role)
+                .then(() => {
+                    if (addMore === "yes") {
+                        addMember();
                     } else {
-                        member = new Intern(name, id, email, additionalProperty);
+                        generate.closeHTML();
                     }
-                    employees.push(member);
-                    generate.generateMemberHTML(member)
-                        .then(() => {
-                            if (addMore === "yes") {
-                                addMember();
-                            } else {
-                                generate.closeHTML();
-                            }
-                        });
-
                 });
+
         });
-}
+};
 
 generate.generateHTML();
 addMember();

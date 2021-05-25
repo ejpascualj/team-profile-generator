@@ -34,34 +34,29 @@ generateHTML = () => {
 
 generateMemberHTML = (member) => {
     return new Promise((resolve, reject) => {
-        console.log(member);
-        const name = member.getName();
-        const role = member.getRole();
-        const id = member.getId();
-        const email = member.getEmail();
         let data = "";
-        if (role === "Engineer") {
+        if (member.role === "Engineer") {
             const github = member.getGithub();
             data = `<div class="col-6">
             <div class="card">
-                <h5>${name}</h5>
+                <h5>${member.name}</h5>
                 <h5>Engineer</h5>
                 <ul>
-                    <li>ID: ${id}</li>
-                    <li>Email ${email}</li>
+                    <li>ID: ${member.id}</li>
+                    <li>Email ${member.email}</li>
                     <li>GitHub: ${github}</li>
                 </ul>
             </div>
         </div>`;
-        } else if (role === "Intern") {
+        } else if (member.role === "Intern") {
             const school = member.getSchool();
             data = `<div>
             <div>
-            <h5>${name}</h5>
+            <h5>${member.name}</h5>
             <h5>Intern</h5>
             <ul>
-                <li>ID: ${id}</li>
-                <li>Email Address: ${email}</li>
+                <li>ID: ${member.id}</li>
+                <li>Email Address: ${member.email}</li>
                 <li>School: ${school}</li>
             </ul>
             </div>
@@ -70,10 +65,10 @@ generateMemberHTML = (member) => {
             const office = member.getOffice();
             data = `<div>
             <div" style="width: 18rem">
-            <h5>${name}<br /><br />Manager</h5>
+            <h5>${member.name}<br /><br />Manager</h5>
             <ul>
-                <li>ID: ${id}</li>
-                <li>Email Address: ${email}</li>
+                <li>ID: ${member.id}</li>
+                <li>Email Address: ${member.email}</li>
                 <li>Office Phone: ${office}</li>
             </ul>
             </div>
