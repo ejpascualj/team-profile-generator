@@ -5,9 +5,11 @@ This is a Node.js command-line application that takes in information about emplo
 
 ## Testing
 ![Test](./assets/testing.gif)
+video: https://drive.google.com/file/d/1mPs7xx7Wl7ss4bXjohHaxHKIbuA28nQU/view
 
 ## Walk-through
 ![Walk thorugh video](./assets/team-profile-generator-demo.gif)
+video: https://drive.google.com/file/d/1bsKfvCagbjQzxDFIwIMveIoTB2ftjPsh/view
 
 ## Mock-up
 ![Mock-up](./assets/deployed-html.jpg)
