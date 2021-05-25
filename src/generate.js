@@ -34,6 +34,7 @@ generateHTML = () => {
 
 generateMemberHTML = (member) => {
     return new Promise((resolve, reject) => {
+        console.log(member);
         const name = member.getName();
         const role = member.getRole();
         const id = member.getId();
@@ -47,7 +48,7 @@ generateMemberHTML = (member) => {
                 <h5>Engineer</h5>
                 <ul>
                     <li>ID: ${id}</li>
-                    <li>Email Address: ${email}</li>
+                    <li>Email ${email}</li>
                     <li>GitHub: ${github}</li>
                 </ul>
             </div>

@@ -54,7 +54,7 @@ addMember = () => {
                 choices: ["yes","no"],
                 name: "addMore"
             }])
-                .then(({additionalProperty, addMore }) => {
+                .then(({name, role, id, email, additionalProperty, addMore }) => {
                     let member;
                     if (role === "Manager") {
                         member = new Manager(name, id, email, additionalProperty);
