@@ -2,7 +2,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 // Require classes
-const Employee = require("../lib/Employee")
 const Engineer = require("../lib/Engineer");
 const Intern = require("../lib/Intern");
 const Manager = require("../lib/Manager");
@@ -33,49 +32,40 @@ generateHTML = () => {
 }
 
 generateMemberHTML = (member) => {
+    const name = member.name;
+    const role = member.getRole();
+    const id = member.id;
+    const email = member.email;
+    let prop = "";
+    let propValue;
+    switch (role) {
+        case "Engineer":
+            prop = "GitHub"
+            propValue = member.getGithub();
+            break;
+        case "Manager":
+            prop = "Office"
+            propValue = member.office;
+            break;
+        case "Intern":
+            prop = "GitHub"
+            propValue = member.office;
+            break;
+    };
     return new Promise((resolve, reject) => {
-        let data = "";
-        if (member.role === "Engineer") {
-            const github = member.getGithub();
-            data = `<div class="col-6">
-            <div class="card">
-                <h5>${member.name}</h5>
-                <h5>Engineer</h5>
+        let html = `<div>
+            <div>
+                <h5>${name}</h5>
+                <h5>${role}</h5>
                 <ul>
-                    <li>ID: ${member.id}</li>
-                    <li>Email ${member.email}</li>
-                    <li>GitHub: ${github}</li>
+                    <li>ID: ${id}</li>
+                    <li>Email ${email}</li>
+                    <li>${prop}: ${propValue}</li>
                 </ul>
             </div>
         </div>`;
-        } else if (member.role === "Intern") {
-            const school = member.getSchool();
-            data = `<div>
-            <div>
-            <h5>${member.name}</h5>
-            <h5>Intern</h5>
-            <ul>
-                <li>ID: ${member.id}</li>
-                <li>Email Address: ${member.email}</li>
-                <li>School: ${school}</li>
-            </ul>
-            </div>
-        </div>`;
-        } else {
-            const office = member.getOffice();
-            data = `<div>
-            <div" style="width: 18rem">
-            <h5>${member.name}<br /><br />Manager</h5>
-            <ul>
-                <li>ID: ${member.id}</li>
-                <li>Email Address: ${member.email}</li>
-                <li>Office Phone: ${office}</li>
-            </ul>
-            </div>
-        </div>`
-        }
         console.log("team member added");
-        fs.appendFile("./dist/index.html", data, (err) => {
+        fs.appendFile("./dist/index.html", html, (err) => {
             if (err) {
                 return reject(err);
             };
